@@ -21,7 +21,7 @@ def register_blueprints(api) -> None:
     from routes.customer import customer_bp
     from routes.test import test_bp
 
-    api.register_blueprint(web_bp, url_prefix="/web")  # Web pages
+    api.register_blueprint(web_bp)  # Web pages
     api.register_blueprint(customer_bp)
     api.register_blueprint(test_bp)
 
