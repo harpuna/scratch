@@ -17,10 +17,11 @@ def configure_extensions(app: Flask) -> None:
     migrate.init_app(app, db)
 
 def register_blueprints(api) -> None:
-    from blueprints.web_routes import web_bp
-    from blueprints.api_routes import api_bp
+    from routes.web_routes import web_bp
+    from routes.customer import customer_bp
+    from routes.test import test_bp
 
-    api.register_blueprint(web_bp)  # Web pages
-    api.register_blueprint(api_bp, url_prefix="/api")  # API routes
-
+    api.register_blueprint(web_bp, url_prefix="/web")  # Web pages
+    api.register_blueprint(customer_bp)
+    api.register_blueprint(test_bp)
 
