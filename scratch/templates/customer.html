@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Customer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        async function fetchCustomer() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const customerId = urlParams.get("id");
+            // const customerId = document.getElementById("customer_id").value;
+            if (!customerId) return alert("Enter a Customer ID!");
+
+            const response = await fetch(`/api/customers/${customerId}`);
+            if (!response.ok) return alert("customer not found!");
+
+            const customer = await response.json();
+            document.getElementById("name").value = customer.name;
+            document.getElementById("email").value = customer.email;
+            document.getElementById("note").value = customer.note;
+        }
+
+        async function updateCustomer(event) {
+            event.preventDefault();  // Prevent form from refreshing the page
+            const urlParams = new URLSearchParams(window.location.search);
+            const customerId = urlParams.get("id");
+            // const customerId = document.getElementById("customer_id").value;
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const note = document.getElementById("note").value;
+
+            const response = await fetch(`/api/customers/${customerId}`, {
+                method: "PATCH",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({name, email, note}),
+            });
+
+            await response.json();
+            window.location.href = "/web/customer_list";
+
+
+        }
+
+        window.onload = fetchCustomer;
+    </script>
+</head>
+<body>
+<header class="header">
+    <div class="logo">Scratch Demo</div>
+    <ul class="nav">
+        <li><a href="/web">Home</a></li>
+        <li><a href="/web">About</a></li>
+        <li><a href="/web">Services</a></li>
+        <li><a href="/web">Contact</a></li>
+    </ul>
+</header>
+<h1>Edit Customer</h1>
+
+<!-- Get Customer Data -->
+<!--    <label for="customer_id">Customer ID:</label>-->
+<!--    <input type="number" id="customer_id">-->
+<!--    <button onclick="fetchCustomer()">Get Customer</button>-->
+
+<br><br>
+
+<!-- Update Customer Data -->
+<form onsubmit="updateCustomer(event)">
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" required>
+    <label for="note">Note:</label>
+    <input type="text" id="note">
+
+    <button type="submit">Update Customer</button>
+</form>
+
+</body>
+</html>
