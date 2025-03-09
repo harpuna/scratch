@@ -4,18 +4,7 @@ from models import Base
 
 class Customer(Base):
     """
-    create table public.customer
-    (
-        customer_id text
-            default concat('customer_', replace((uuid_generate_v4())::text, '-'::text, ''::text))
-            not null
-            primary key,
-        name        text not null,
-        email       text not null,
-        note        text,
-        created_at  timestamp default now() not null,
-        updated_at  timestamp default now() not null
-    );
+    See database scripts folder for specific DDL statements
     """
 
     __tablename__ = "customer"
@@ -23,16 +12,14 @@ class Customer(Base):
     id = db.Column(
         "customer_id",
         db.Text,
-        server_default=db.func.concat(
-            "customer_id_", db.func.uuid_generate_v4()
-        ),
+        server_default=db.func.concat("customer_id_", db.func.uuid_generate_v4()),
         primary_key=True,
     )
     name = db.Column(db.Text, nullable=False)
     email = db.Column(db.Text, unique=True, nullable=False)
     note = db.Column(db.Text, nullable=True)
 
-    orders = db.relationship('Order', back_populates='customer', cascade="all, delete-orphan")
-
-    def __repr__(self):
-        return f"<Customer {self.name}>"
+    # One-to-many relationship with Order, lazy-loaded
+    orders = db.relationship(
+        "Order", back_populates="customer", cascade="all, delete-orphan"
+    )

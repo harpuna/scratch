@@ -1,16 +1,21 @@
 from flask_smorest import Blueprint
 from models.customer import Customer
-from schemas.customer import CustomerSchema, CustomerPatchRequestSchema, CustomerWithPostsSchema
+from schemas.customer import (
+    CustomerPatchRequestSchema,
+    CustomerSchema,
+    CustomerWithPostsSchema,
+)
 from services.jsonplaceholder import get_post, get_post_comments
 
 customer_bp = Blueprint("customer_bp", __name__, url_prefix="/api")
 
+
 @customer_bp.route("/customers", methods=["GET"])
 @customer_bp.response(200, CustomerSchema(many=True))
 def get_customers():
-
     customers = Customer.query.all()
     return customers
+
 
 @customer_bp.route("/customers/<customer_id>", methods=["GET"])
 @customer_bp.response(200, CustomerSchema)
@@ -19,6 +24,7 @@ def get_customer(customer_id):
     if customer is None:
         return None, 404
     return customer
+
 
 @customer_bp.route("/customers/<customer_id>/posts/<post_id>", methods=["GET"])
 @customer_bp.response(200, CustomerWithPostsSchema)
@@ -34,6 +40,7 @@ def get_customer_with_posts(customer_id, post_id):
     resp["post"] = post
     return resp
 
+
 @customer_bp.route("/customers", methods=["POST"])
 @customer_bp.arguments(CustomerSchema)
 @customer_bp.response(201, CustomerSchema)
@@ -45,6 +52,7 @@ def add_customer(request: Customer):
     # db.session.add(new_customer)
     # db.session.commit()
     return new_customer
+
 
 @customer_bp.route("/customers/<customer_id>", methods=["PATCH"])
 @customer_bp.arguments(CustomerPatchRequestSchema)

@@ -2,6 +2,10 @@ from extensions import db
 
 
 class Base(db.Model):
+    """
+    Handy convenience fields and methods for working with models, including common CRUD operations.
+    """
+
     __abstract__ = True
     created_at = db.Column(
         db.DateTime(timezone=True), server_default=db.func.current_timestamp()
@@ -38,7 +42,6 @@ class Base(db.Model):
 
         db.session.commit()
         return instance
-
 
     @classmethod
     def delete(cls, id):
