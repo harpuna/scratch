@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Blueprint Test</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<header class="header">
+    <div class="logo">Scratch Demo</div>
+    <ul class="nav">
+        <li><a href="/web">Home</a></li>
+        <li><a href="/web">About</a></li>
+        <li><a href="/web">Services</a></li>
+        <li><a href="/web">Contact</a></li>
+    </ul>
+</header>
+<h1>Welcome to {{title}}!</h1>
+<div>
+    <h2>Meet our <a href="customer_list">CUSTOMERS</a></h2>
+</div>
+<br/>
+<h3>Also, here is a dog:</h3>
+<div>
+    <a href="/web">
+        <img src="{{ dog_url }}" alt="Click for new dog!" style="max-width:400px;width:100%"/>
+    </a>
+</div>
+<div><i>(click the dog for a new dog)</i></div>
+</body>
+</html>

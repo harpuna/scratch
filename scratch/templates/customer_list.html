@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+</head>
+<body>
+<header class="header">
+    <div class="logo">Scratch Demo</div>
+    <ul class="nav">
+        <li><a href="/web">Home</a></li>
+        <li><a href="/web">About</a></li>
+        <li><a href="/web">Services</a></li>
+        <li><a href="/web">Contact</a></li>
+    </ul>
+</header>
+<h1>Customer List</h1>
+<div class="table-container">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Note</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for customer in customers %}
+        <tr>
+            <td><a href="customer?id={{ customer.id }}">{{ customer.id }}</a></td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.note }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div>
+    <p>CREATE <a href="customer_new">NEW</a> CUSTOMER</p>
+
+</div>
+</body>
+</html>
