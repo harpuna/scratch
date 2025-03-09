@@ -1,7 +1,10 @@
 import os
+from dataclasses import dataclass
 
-class Config:
-    API_TITLE = "My Flask API"  # <-- REQUIRED
+
+@dataclass
+class Config(object):
+    API_TITLE = "Scratch Demo"  # <-- REQUIRED
     API_VERSION = "v1"
     OPENAPI_VERSION = "3.0.2"
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "postgresql://flask_user:flask_password@localhost/flask_db")

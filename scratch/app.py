@@ -1,10 +1,11 @@
 from flask import Flask
 from extensions import api, db, ma, migrate
+from config import app_config
 
 
-def create_app() -> Flask:
+def create_app(config_class=app_config) -> Flask:
     app = Flask("scratch")
-    app.config.from_object("config.Config")
+    app.config.from_object(config_class)
     configure_extensions(app)
     register_blueprints(api)
     return app
@@ -19,9 +20,11 @@ def configure_extensions(app: Flask) -> None:
 def register_blueprints(api) -> None:
     from routes.web_routes import web_bp
     from routes.customer import customer_bp
+    from routes.order import order_bp
     from routes.test import test_bp
 
     api.register_blueprint(web_bp)  # Web pages
     api.register_blueprint(customer_bp)
+    api.register_blueprint(order_bp)
     api.register_blueprint(test_bp)
 

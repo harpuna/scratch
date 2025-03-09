@@ -13,6 +13,10 @@ class Base(db.Model):
     )
 
     @classmethod
+    def all(cls):
+        return cls.query.all()
+
+    @classmethod
     def select(cls, id):
         return cls.query.get(id)
 

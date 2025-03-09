@@ -32,5 +32,7 @@ class Customer(Base):
     email = db.Column(db.Text, unique=True, nullable=False)
     note = db.Column(db.Text, nullable=True)
 
+    orders = db.relationship('Order', back_populates='customer', cascade="all, delete-orphan")
+
     def __repr__(self):
         return f"<Customer {self.name}>"
