@@ -11,3 +11,4 @@ class Config(object):
         "DATABASE_URL", "postgresql://flask_user:flask_password@localhost/flask_db"
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    ENV = "prod"

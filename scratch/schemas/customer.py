@@ -11,7 +11,7 @@ class CustomerSchema(Schema):
     id = fields.Str(required=True, dump_only=True)
     name = fields.Str(required=True)
     email = fields.Str(required=True)
-    note = fields.Str(required=False)  # , dump_default=None, load_default=None)
+    note = fields.Str(required=False, dump_default=None, load_default=None)
     orders = ma.Nested(OrderSchema, many=True)
 
 
