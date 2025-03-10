@@ -82,14 +82,20 @@ def configure_extensions(app: Flask) -> None:
 
 
 def register_blueprints(api) -> None:
+
+    # TODO: remove this if not needed (seems to be fine without it)
+    # swagger_bp = Blueprint('swagger', __name__, url_prefix='/swagger-ui')
+    # Swagger(swagger_bp) #, config=swagger_config)  # Assuming swagger_config is defined
+    # app.register_blueprint(swagger_bp)
+
     from routes.customer import customer_bp
     from routes.error import error_bp
     from routes.health import health_bp
     from routes.order import order_bp
     from routes.web_routes import web_bp
 
-    api.register_blueprint(error_bp)
     api.register_blueprint(health_bp)
-    api.register_blueprint(web_bp)  # Web pages
     api.register_blueprint(customer_bp)
     api.register_blueprint(order_bp)
+    api.register_blueprint(web_bp)  # Web pages
+    api.register_blueprint(error_bp)

@@ -5,7 +5,7 @@ from schemas.customer import CustomerSchema
 from services.jsonplaceholder import get_random_dog_href
 
 web_bp = Blueprint(
-    "web_bp", __name__, template_folder="../templates", url_prefix="/web"
+    "Web Pages", __name__, template_folder="../templates", url_prefix="/web"
 )
 
 

@@ -4,7 +4,7 @@ from models.order import Order
 from schemas.customer import CustomerSchema
 from schemas.order import OrderSchema
 
-order_bp = Blueprint("order_bp", __name__, url_prefix="/api")
+order_bp = Blueprint("Order", __name__, url_prefix="/api")
 
 
 @order_bp.route("/orders", methods=["GET"])
