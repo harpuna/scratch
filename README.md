@@ -1,10 +1,49 @@
-this is an unmerged README on develop branch
+(for markdown diagram formatting see [here](https://mermaid.js.org/syntax/flowchart.html))
 
-### Overview
+# Overview
+
+## Architecture
+
+```mermaid
+graph TD;
+    USER-->UI;
+    USER-->REST;
+    UI-->JINJA;
+    JINJA-->FLASK;
+    REST-->FLASK;
+    FLASK-->POSTGRES;
+```
+
+
+## Entities
 
 
 
-### Setup
+```mermaid
+erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    CUSTOMER }|..|{ POST : creates
+    POST ||--|{ COMMENTS : contains
+```
+
+
+## Start Servers
+
+1. Start and verify Flask server:
+   1. `bin/run.sh`
+   1. `curl --location 'http://127.0.0.1:5000/health'`
+   1. Browser: http://127.0.0.1:5000/web/
+1. Start the React server
+   1. `cd test-react-app`
+   1. `npm run dev`
+   1. Browser: http://localhost:5173/
+
+
+
+
+# Setup
+
+## Prerequirements
 
 1. Python
    1. is installed?
@@ -42,7 +81,7 @@ this is an unmerged README on develop branch
        1. `git clone git@github.com:harpuna/scratch.git`
 
 
-### Build
+## Build
 
 1. Install requirements
    1. `pip install -r requirements.txt`
@@ -50,19 +89,10 @@ this is an unmerged README on develop branch
    1. `PGPASSWORD=flask_password psql -U flask_user -d flask_db -a -f create_customer_and_order_tables.sql`
    1.
 
-### Start Servers
 
-1. Start and verify Flask server:
-   1. `bin/run.sh`
-   1. `curl --location 'http://127.0.0.1:5000/health'`
-   1. Browser: http://127.0.0.1:5000/web/
-1. Start the React server
-   1. `cd test-react-app`
-   1. `npm run dev`
-   1. Browser: http://localhost:5173/
+# Developing
 
-
-### Maintenance
+## Maintenance
 
 1. Adding a new lib, ex:
    1. `pip install flask flask-sqlalchemy psycopg2-binary`
