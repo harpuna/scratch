@@ -1,4 +1,5 @@
 from flask_smorest import Blueprint
+from models.error import ResourceNotFoundError
 from models.order import Order
 from schemas.customer import CustomerSchema
 from schemas.order import OrderSchema
@@ -18,7 +19,7 @@ def get_orders():
 def get_order(order_id):
     order = Order.select(order_id)
     if order is None:
-        return None, 404
+        raise ResourceNotFoundError(order_id)
     return order
 
 

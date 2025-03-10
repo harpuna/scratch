@@ -1,5 +1,7 @@
+from app import logger
 from flask_smorest import Blueprint
 from models.customer import Customer
+from models.error import CustomerNotFound
 from schemas.customer import (
     CustomerPatchRequestSchema,
     CustomerSchema,
@@ -14,15 +16,17 @@ customer_bp = Blueprint("customer_bp", __name__, url_prefix="/api")
 @customer_bp.response(200, CustomerSchema(many=True))
 def get_customers():
     customers = Customer.query.all()
+    logger().bind(all_customers_count=len(customers))
     return customers
 
 
 @customer_bp.route("/customers/<customer_id>", methods=["GET"])
 @customer_bp.response(200, CustomerSchema)
 def get_customer(customer_id):
+    logger().bind(customer_id=customer_id)
     customer = Customer.select(customer_id)
     if customer is None:
-        return None, 404
+        raise CustomerNotFound(customer_id)
     return customer
 
 

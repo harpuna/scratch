@@ -13,6 +13,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -65,4 +71,109 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+
+.header {
+    background-color: #333;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.logo_sm {
+    font-size: 1.5rem;
+    font-weight: bold;
+    max-width:400px;
+    width:100%;
+}
+
+
+/* Navigation menu */
+.nav {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+.nav li {
+    display: inline;
+}
+
+.nav a {
+    text-decoration: none;
+    color: white;
+    padding: 8px 12px;
+    transition: background 0.3s;
+}
+
+.nav a:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+/* Form Container */
+.form-container {
+    background: white;
+    width: 505px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Form Title */
+.form-container h3 {
+    text-align: center;
+    color: #333;
+}
+
+/* Input Fields */
+.form-container input {
+    width: 80%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Buttons */
+.form-container button {
+    width: 30%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    /*margin-top: 10px;*/
+    margin: 8px 10px;
+}
+
+/* Save Button */
+.form-container .save-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.form-container .save-btn:hover {
+    background-color: #218838;
+}
+
+/* Cancel Button */
+.form-container .cancel-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.form-container .cancel-btn:hover {
+    background-color: #c82333;
 }
