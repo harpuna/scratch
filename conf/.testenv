@@ -1,0 +1,5 @@
+# Environment variables for dev
+FLASK_ENV=test
+FLASK_DEBUG=1
+VERBOSE_LOGGING=False
+DATABASE_URL=postgresql://flask_user:flask_password@localhost/flask_db

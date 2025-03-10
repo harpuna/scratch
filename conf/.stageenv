@@ -1,0 +1,6 @@
+# Environment variables for dev
+FLASK_ENV=test
+FLASK_DEBUG=1
+API_TITLE=Scratch Demo STAGE
+VERBOSE_LOGGING=False
+DATABASE_URL=tbd_stage
