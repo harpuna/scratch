@@ -9,7 +9,7 @@ from schemas.customer import (
 )
 from services.jsonplaceholder import get_post, get_post_comments
 
-customer_bp = Blueprint("customer_bp", __name__, url_prefix="/api")
+customer_bp = Blueprint("Customer", __name__, url_prefix="/api")
 
 
 @customer_bp.route("/customers", methods=["GET"])

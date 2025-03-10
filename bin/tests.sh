@@ -12,4 +12,4 @@ fi
 
 export ENVIRON=test
 export PYTHONPATH=./scratch
-pytest -s -W ignore::DeprecationWarning $DIR
+pytest -s -W ignore::DeprecationWarning --cov=scratch --cov-report=term $DIR

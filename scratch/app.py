@@ -82,14 +82,15 @@ def configure_extensions(app: Flask) -> None:
 
 
 def register_blueprints(api) -> None:
+
     from routes.customer import customer_bp
     from routes.error import error_bp
     from routes.health import health_bp
     from routes.order import order_bp
     from routes.web_routes import web_bp
 
-    api.register_blueprint(error_bp)
     api.register_blueprint(health_bp)
-    api.register_blueprint(web_bp)  # Web pages
     api.register_blueprint(customer_bp)
     api.register_blueprint(order_bp)
+    api.register_blueprint(web_bp)  # Web pages
+    api.register_blueprint(error_bp)

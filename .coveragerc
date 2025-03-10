@@ -1,0 +1,10 @@
+[report]
+fail_under = 75
+
+[run]
+omit =
+    __init__.py
+    scratch/models/*
+    scratch/app.py
+    scratch/run.py
+    scratch/services/jsonplaceholder.py
