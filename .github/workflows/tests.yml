@@ -21,4 +21,4 @@ jobs:
           pip install pytest pytest-cov
 
       - name: Run tests with coverage enforcement
-        run: pytest --cov=my_package --cov-fail-under=80
+        run: PYTHONPATH=./scratch pytest --cov=my_package --cov-fail-under=80
