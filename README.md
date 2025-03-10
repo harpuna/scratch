@@ -2,17 +2,73 @@
 
 # Overview
 
+## Quickstart
+
+1. Run unit tests:
+   1. `bin/tests.sh`
+1. Start and verify Flask server:
+   1. `bin/run.sh`
+   1. `curl --location 'http://127.0.0.1:5000/health'`
+1. Verify Swagger and the web app:
+   1. Browser: http://127.0.0.1:5000/swagger-ui
+   1. Browser: http://127.0.0.1:5000/web
+1. Start the React server
+   1. `cd test-react-app`
+   1. `npm run dev`
+   1. Browser: http://localhost:5173/
+
+
 ## Architecture
 
 ```mermaid
 graph TD;
-    USER-->UI;
+    USER-->HTML;
     USER-->REST;
-    UI-->JINJA;
+    REACT-->REST;
+    HTML-->JINJA;
     JINJA-->FLASK;
     REST-->FLASK;
     FLASK-->POSTGRES;
 ```
+
+
+## Interesting Code
+
+`app.py`
+
+- create_app
+  - all the initialization of the Flask App
+- logger()
+  - singleton to return custom logger which all the code should use
+  - do not use `app.logger` directly
+    - ex:
+    ```
+    from app import logger
+    logger().info("Info message")
+    ```
+  - custom logger provides a `bind()` function to dynamically add log message attributes
+    - ex:
+    ```
+    from app import logger
+    logger().bind(all_customers_count=len(customers))
+    ```
+  - Best Practices:
+    - do not explicitly log any messages (info(), warning() etc)
+    - rather, bind() whatever you want
+    - all Flask responses will automatically create a single log message, which will include all bound values as attributes
+
+`models/base.py`
+
+- provides common CRUD operations inherited by all other model classes
+
+
+`conf/.env` files
+
+- environment-specific config values
+- which file will be used? Based on the ENVIRON var, ex: `export ENVIRON=test`
+
+
+##### TODO: add more interesting code...
 
 
 ## Entities
@@ -25,21 +81,6 @@ erDiagram
     CUSTOMER }|..|{ POST : creates
     POST ||--|{ COMMENTS : contains
 ```
-
-
-## Start Servers
-
-1. Start and verify Flask server:
-   1. `bin/run.sh`
-   1. `curl --location 'http://127.0.0.1:5000/health'`
-   1. Browser: http://127.0.0.1:5000/web/
-1. Start the React server
-   1. `cd test-react-app`
-   1. `npm run dev`
-   1. Browser: http://localhost:5173/
-
-
-
 
 # Setup
 
@@ -87,7 +128,7 @@ erDiagram
    1. `pip install -r requirements.txt`
 1. create the tables
    1. `PGPASSWORD=flask_password psql -U flask_user -d flask_db -a -f create_customer_and_order_tables.sql`
-   1.
+
 
 
 # Developing
