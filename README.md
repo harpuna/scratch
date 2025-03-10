@@ -6,11 +6,11 @@ this is an unmerged README on develop branch
 
 ### Setup
 
-1. Python 
+1. Python
    1. is installed?
       1. `which python` or `which python3`
       1. `python -V` or `python3 -V`
-      1. Tip: nice alias to add: 
+      1. Tip: nice alias to add:
          1. `alias python="python"`
    1. No? Ex for OSX:
       1. https://www.python.org/downloads/macos/
@@ -32,23 +32,23 @@ this is an unmerged README on develop branch
        1. `ALTER DATABASE flask_db OWNER to flask_user;`
        1. `GRANT ALL PRIVILEGES ON DATABASE flask_db TO flask_user;`
        1. `GRANT ALL ON ALL TABLES TO flask_user;`
-   1. Test the connection 
+   1. Test the connection
 1. Github
    1. Create ssh keys to authenticate with github.  Ex:
        1. `ssh-keygen -t ed25519 -C "you@email.com"`
        1. `eval "$(ssh-agent -s)"`
        1. `ssh-add ~/.ssh/id_ed2551911`
-    1. Clone this repo 
+    1. Clone this repo
        1. `git clone git@github.com:harpuna/scratch.git`
 
-      
+
 ### Build
 
 1. Install requirements
    1. `pip install -r requirements.txt`
 1. create the tables
    1. `PGPASSWORD=flask_password psql -U flask_user -d flask_db -a -f create_customer_and_order_tables.sql`
-   1. 
+   1.
 
 ### Start Servers
 
@@ -61,11 +61,10 @@ this is an unmerged README on develop branch
    1. `npm run dev`
    1. Browser: http://localhost:5173/
 
-    
+
 ### Maintenance
 
 1. Adding a new lib, ex:
    1. `pip install flask flask-sqlalchemy psycopg2-binary`
    1. `pip freeze > requirements.txt`
    1. `pip install -r requirements.txt`
-
