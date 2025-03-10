@@ -5,7 +5,7 @@ from flask_smorest import Blueprint
 from models.error import ResourceNotFoundError, ScratchError
 from schemas.error import ResourceNotFoundSchema, ScratchErrorSchema
 
-error_bp = Blueprint("error", __name__, description="handles all error handling")
+error_bp = Blueprint("Error", __name__, description="handles all error handling")
 
 
 @error_bp.app_errorhandler(Exception)
