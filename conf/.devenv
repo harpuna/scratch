@@ -1,0 +1,6 @@
+# Environment variables for dev
+FLASK_ENV=dev
+FLASK_DEBUG=1
+API_TITLE=Scratch Demo DEV
+VERBOSE_LOGGING=True
+DATABASE_URL=postgresql://flask_user:flask_password@localhost/flask_db

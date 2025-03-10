@@ -6,7 +6,7 @@ from extensions import api, db, ma, migrate
 from flask import Flask, g, has_app_context, request
 from utils.StructuredLogger import CustomFormatter, StructuredLogger
 
-app = Flask("scratch")
+app = Flask(app_config.API_TITLE)
 
 
 def create_app(config_class=app_config) -> Flask:
@@ -54,17 +54,24 @@ def log_response(response):
 
 def configure_logging(app: Flask) -> None:
     console_handler = logging.StreamHandler()
-    console_handler.setFormatter(CustomFormatter(pretty_format_json=True))
+    # pretty json-formatted logs are great for readability, but too bulky for most environments
+    console_handler.setFormatter(
+        CustomFormatter(pretty_format_json=app_config.VERBOSE_LOGGING)
+    )
     app.logger.addHandler(console_handler)
 
+    # TODO: maxBytes and backupCount could come from config files?
     file_handler = RotatingFileHandler(
         "/tmp/scratch.log", maxBytes=1000000, backupCount=3
     )
     file_handler.setFormatter(CustomFormatter())
     app.logger.addHandler(file_handler)
 
-    # TODO: read this from environment-specific property
-    app.logger.setLevel(logging.INFO)
+    # TODO: what levels do we want per env?
+    if app_config.ENVIRON in ("dev", "test"):
+        app.logger.setLevel(logging.DEBUG)
+    else:
+        app.logger.setLevel(logging.INFO)
 
 
 def configure_extensions(app: Flask) -> None:
