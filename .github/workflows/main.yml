@@ -1,12 +1,6 @@
 name: Run Tests and Check Coverage
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
   test:
@@ -28,4 +22,3 @@ jobs:
 
       - name: Run tests with coverage enforcement
         run: pytest --cov=my_package --cov-fail-under=80
-
