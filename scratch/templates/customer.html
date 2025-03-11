@@ -86,14 +86,14 @@
             <thead>
             <tr>
                 <th>Description</th>
-                <th>Cost in cents</th>
+                <th>Cost</th>
             </tr>
             </thead>
             <tbody>
             {% for order in customer.orders %}
             <tr>
                 <td>{{ order.description }}</td>
-                <td>{{ order.total_amount_in_cents }}</td>
+                <td>{{ "$%.2f"|format(order.total_amount_in_cents / 100) }}</td>
             </tr>
             {% endfor %}
             </tbody>

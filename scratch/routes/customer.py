@@ -4,6 +4,7 @@ from models.customer import Customer
 from models.error import CustomerNotFound
 from schemas.customer import (
     CustomerPatchRequestSchema,
+    CustomerPostResponseSchema,
     CustomerSchema,
     CustomerWithPostsSchema,
 )
@@ -47,14 +48,11 @@ def get_customer_with_posts(customer_id, post_id):
 
 @customer_bp.route("/customers", methods=["POST"])
 @customer_bp.arguments(CustomerSchema)
-@customer_bp.response(201, CustomerSchema)
+@customer_bp.response(201, CustomerPostResponseSchema)
 def add_customer(request: Customer):
+    if request["name"] == "xxx":
+        return {"errors": ["xxx is not an allowed name", "Invalid name"]}, 400
     new_customer = Customer.insert(request)
-
-    # manual approach; not as cool as the insert() function
-    # new_customer = Customer(name=request["name"], email=request["email"], note=request["note"])
-    # db.session.add(new_customer)
-    # db.session.commit()
     return new_customer
 
 

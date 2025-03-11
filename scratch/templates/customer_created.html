@@ -16,35 +16,31 @@
         <li><a href="/web">Contact</a></li>
     </ul>
 </header>
-<h1>Customer List</h1>
-    <p>CREATE <a href="customer_new">NEW</a> CUSTOMER</p>
-
+<h1>Created!</h1>
 <div class="table-container">
     <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Note</th>
-            <th>Orders</th>
-        </tr>
-        </thead>
         <tbody>
-        {% for customer in customers %}
         <tr>
-            <td><a href="customer?id={{ customer.id }}">{{ customer.id }}</a></td>
-            <td>{{ customer.name }}</td>
-            <td>{{ customer.email }}</td>
-            <td>{{ customer.note }}</td>
-            <td>{{ customer.orders | length }}</td>
-        </tr>
-        {% endfor %}
+            <td>ID</td><td><a href="customer?id={{ customer.id }}">{{ customer.id }}</a></td>
+        </tr><tr>
+            <td>Name</td><td>{{ customer.name }}</td>
+            </tr><tr>
+            <td>Email</td><td>{{ customer.email }}</td>
+            </tr><tr>
+            <td>Note</td><td>{{ customer.note }}</td>
+            </tr><tr>
+            <td>Orders</td> <td>{{ customer.orders | length }}</td>
+            </tr>
         </tbody>
     </table>
 </div>
 <div>
-
+    <h3>Created: {{ created_at }}</h3>
+    <h3>Word of the day: {{ word_of_the_day }}</h3>
 </div>
+
+<a href="customer?id={{ customer.id }}" class="button">Edit This Customer</a>
+<a href="customer_list" class="button">Show All Customers</a>
+
 </body>
 </html>
