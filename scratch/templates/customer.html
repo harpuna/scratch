@@ -75,7 +75,32 @@
     <input type="text" id="note">
 
     <button type="submit">Update Customer</button>
+
 </form>
 
+{% if customer.orders %}
+    <br><br>
+    <h3>Orders</h3>
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Description</th>
+                <th>Cost</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for order in customer.orders %}
+            <tr>
+                <td>{{ order.description }}</td>
+                <td>{{ "$%.2f"|format(order.total_amount_in_cents / 100) }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endif %}
 </body>
 </html>

@@ -21,5 +21,5 @@ class Customer(Base):
 
     # One-to-many relationship with Order, lazy-loaded
     orders = db.relationship(
-        "Order", back_populates="customer", cascade="all, delete-orphan"
+        "Order", back_populates="customer", cascade="all, delete-orphan", lazy="joined"
     )
