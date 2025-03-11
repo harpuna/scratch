@@ -27,3 +27,9 @@ def get_random_dog_href():
     url = "https://dog.ceo/api/breeds/image/random"
     response = requests.get(url)
     return response.json()["message"]
+
+
+def get_word_of_the_day() -> str:
+    url = "https://random-word-api.herokuapp.com/word"
+    response = requests.get(url)
+    return response.json()[0]

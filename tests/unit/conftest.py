@@ -1,43 +1,51 @@
-import os
-from pathlib import Path
-
 import pytest
-from app import create_app
-from config import app_config
-from models import Order
-
-
-@pytest.fixture(scope="module")
-def app():
-    # The app expects to be in the root folder
-    current_dir = os.getcwd()
-    os.chdir(Path(__file__).parents[2])
-    app_ = create_app(app_config)
-    os.chdir(current_dir)
-    return app_
+from models import Customer, Order
 
 
 @pytest.fixture
-def mock_db_order(mocker):
-    order_mock = mocker.patch("routes.order.Order.select")
-    order = Order(
-        id="order_2",
-        customer_id="customer_3",
-        description="test order",
-        total_amount_in_cents=1488,
-    )
-    order_mock.return_value = order
-    return order_mock
+def mock_order_dict():
+    return {
+        "id": "order_1",
+        "customer_id": "customer_1",
+        "description": "test order",
+        "total_amount_in_cents": 1995,
+    }
 
 
 @pytest.fixture
-def mock_db_all_orders(mocker):
-    order_mock = mocker.patch("routes.order.Order.all")
-    order = Order(
-        id="order_1",
-        customer_id="customer_2",
-        description="test order",
-        total_amount_in_cents=1995,
-    )
-    order_mock.return_value = [order, order]
-    return order_mock
+def mock_db_order(mocker, mock_order_dict):
+    all_order_mock = mocker.patch("routes.order.Order.all")
+    select_order_mock = mocker.patch("routes.order.Order.select")
+    order = Order(**mock_order_dict)
+    select_order_mock.return_value = order
+    all_order_mock.return_value = [order, order]
+
+
+@pytest.fixture
+def mock_customer_dict():
+    return {
+        "email": "emily@gmail.com",
+        "id": "customer_1",
+        "name": "Emily Dickinson",
+        "note": "famous poet",
+        "orders": [],
+    }
+
+
+@pytest.fixture
+def mock_db_customer(mocker, mock_customer_dict, mock_order_dict):
+    customer_all_mock = mocker.patch("routes.customer.Customer.all")
+    customer_select_mock = mocker.patch("routes.customer.Customer.select")
+    new_customer_mock = mocker.patch("routes.customer.Customer.insert")
+
+    order = Order(**mock_order_dict)
+    customer_with_orders = Customer(**mock_customer_dict)
+    customer_with_orders.orders = [order, order]
+
+    customer_select_mock.return_value = customer_with_orders
+    customer_all_mock.return_value = [customer_with_orders, customer_with_orders]
+
+    customer_no_orders = Customer(**mock_customer_dict)
+    new_customer_mock.return_value = customer_no_orders
+
+    # return customer_select_mock

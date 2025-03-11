@@ -21,14 +21,22 @@
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({name, email, note}),
             });
-
-            await response.json();
-            window.location.href = "/web/customer_list";
+            if (!response.ok) {
+                let response_body = await response.json()
+                console.log("ERRORS " + response_body.errors)
+                let errorText = ""
+                for (let i = 0; i < response_body.errors.length; i++) {
+                    errorText += "<br/>Error: " + response_body.errors[i];
+                }
+                document.getElementById("errorMessage").innerHTML = errorText;
+                document.getElementById("errorMessage").style.display = "block";
+            } else {
+                let response_body = await response.json(); // Assuming JSON response
+                window.location.href = `customer_created?id=${encodeURIComponent(response_body.id)}`; // Redirect
+            }
 
 
         }
-
-        window.onload = fetchCustomer;
     </script>
 </head>
 <body>
@@ -54,15 +62,12 @@
 <form onsubmit="updateCustomer(event)">
     <label for="name">Name:</label>
     <input type="text" id="name" required>
-
     <label for="email">Email:</label>
     <input type="email" id="email" required>
     <label for="note">Note:</label>
     <input type="text" id="note">
-
-
     <button type="submit">Create</button>
 </form>
-
+<p id="errorMessage" style="color: red; display: none;"></p>
 </body>
 </html>

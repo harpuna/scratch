@@ -8,3 +8,5 @@ omit =
     scratch/app.py
     scratch/run.py
     scratch/services/jsonplaceholder.py
+    scratch/routes/error.py
+    scratch/utils/StructuredLogger.py

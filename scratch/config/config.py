@@ -13,6 +13,7 @@ load_dotenv(os.path.join(basedir, f"conf/.{env}env"))
 @dataclass
 class Config(object):
     ENVIRON = os.getenv("ENVIRON", "dev")
+    TESTING = os.getenv("TESTING", "False").lower() == "true"
     API_TITLE = os.getenv("API_TITLE", "Scratch Demo")
     API_VERSION = "v1"
     OPENAPI_VERSION = os.getenv("OPENAPI_VERSION")
