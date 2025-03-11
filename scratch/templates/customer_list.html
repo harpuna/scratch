@@ -25,6 +25,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>Note</th>
+            <th>Orders</th>
         </tr>
         </thead>
         <tbody>
@@ -34,6 +35,7 @@
             <td>{{ customer.name }}</td>
             <td>{{ customer.email }}</td>
             <td>{{ customer.note }}</td>
+            <td>{{ customer.orders | length }}</td>
         </tr>
         {% endfor %}
         </tbody>
