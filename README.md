@@ -73,7 +73,8 @@ graph TD;
 
 ## Entities
 
-
+<details>
+  <summary><font color="blue">CLICK HERE TO EXPAND / COLLAPSE</font></summary>
 
 ```mermaid
 erDiagram
@@ -82,46 +83,48 @@ erDiagram
     POST ||--|{ COMMENTS : contains
 ```
 
+</details>
+
 # Setup
 
 ## Prerequirements
 
 <details>
-  <summary>EXPAND DETAILS</summary>
+  <summary><font color="blue">CLICK HERE TO EXPAND / COLLAPSE</font></summary>
 
 1. Python
    1. is installed?
       1. `which python` or `which python3`
-      1. `python -V` or `python3 -V`
-      1. Tip: nice alias to add:
+      2. `python -V` or `python3 -V`
+      3. Tip: nice alias to add:
          1. `alias python="python"`
-   1. No? Ex for OSX:
+   2. No? Ex for OSX:
       1. https://www.python.org/downloads/macos/
-      1. `which python3`
-      1. .bashrc or .profile: `export PATH=/Library/Frameworks/Python.framework/Versions/3.12/bin:$PATH` (or whatever the result of which command)
-      1. .bashrc or .profile: `export PYTHONPATH=./`
-1. Node
+      2. `which python3`
+      3. .bashrc or .profile: `export PATH=/Library/Frameworks/Python.framework/Versions/3.12/bin:$PATH` (or whatever the result of which command)
+      4. .bashrc or .profile: `export PYTHONPATH=./`
+2. Node
    1. Is installed?
       1. `node --version`
-   1. No?
+   2. No?
       1. `nvm install --lts`
-      1. `npm --version`
-      1. `node --version`
-1. Postgres
+      2. `npm --version`
+      3. `node --version`
+3. Postgres
    1. Easy install https://postgresapp.com/
-   1. Create the db
+   2. Create the db
        1. `CREATE DATABASE flask_db;`
-       1. `CREATE USER flask_user WITH PASSWORD 'flask_password';`
-       1. `ALTER DATABASE flask_db OWNER to flask_user;`
-       1. `GRANT ALL PRIVILEGES ON DATABASE flask_db TO flask_user;`
-       1. `GRANT ALL ON ALL TABLES TO flask_user;`
-   1. Test the connection
-1. Github
+       2. `CREATE USER flask_user WITH PASSWORD 'flask_password';`
+       3. `ALTER DATABASE flask_db OWNER to flask_user;`
+       4. `GRANT ALL PRIVILEGES ON DATABASE flask_db TO flask_user;`
+       5. `GRANT ALL ON ALL TABLES TO flask_user;`
+   3. Test the connection
+4. Github
    1. Create ssh keys to authenticate with github.  Ex:
        1. `ssh-keygen -t ed25519 -C "you@email.com"`
-       1. `eval "$(ssh-agent -s)"`
-       1. `ssh-add ~/.ssh/id_ed2551911`
-    1. Clone this repo
+       2. `eval "$(ssh-agent -s)"`
+       3. `ssh-add ~/.ssh/id_ed2551911`
+    2. Clone this repo
        1. `git clone git@github.com:harpuna/scratch.git`
 
 </details>
