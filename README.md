@@ -135,7 +135,8 @@ erDiagram
 
 ## Maintenance
 
-1. Adding a new lib, ex:
-   1. `pip install flask flask-sqlalchemy psycopg2-binary`
+1. Adding a new lib
+   1. ex: `pip install flask flask-sqlalchemy psycopg2-binary`
    1. `pip freeze > requirements.txt`
    1. `pip install -r requirements.txt`
+   1. `pipenv lock`
