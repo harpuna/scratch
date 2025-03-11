@@ -74,7 +74,7 @@ graph TD;
 ## Entities
 
 <details>
-  <summary><font color="blue">CLICK HERE TO EXPAND / COLLAPSE</font></summary>
+  <summary><i>CLICK HERE TO EXPAND / COLLAPSE</i></summary>
 
 ```mermaid
 erDiagram
@@ -90,7 +90,7 @@ erDiagram
 ## Prerequirements
 
 <details>
-  <summary><font color="blue">CLICK HERE TO EXPAND / COLLAPSE</font></summary>
+  <summary><i>CLICK HERE TO EXPAND / COLLAPSE</i></summary>
 
 1. Python
    1. is installed?
