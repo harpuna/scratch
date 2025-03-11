@@ -41,7 +41,7 @@ def get_open_credit_lines():
     return response.json()[0]
 
 
-def calculate_term_and_rate(amount_in_cents):
+def calculate_term_and_rate(amount_in_cents, open_credit_lines):
     """
     - Business rules
       - principal amount
@@ -54,8 +54,6 @@ def calculate_term_and_rate(amount_in_cents):
 
     if amount_in_cents < 1000000 or amount_in_cents > 5000000:
         return None, None
-
-    open_credit_lines = get_open_credit_lines()
 
     if open_credit_lines < 10:
         return 36, 10
