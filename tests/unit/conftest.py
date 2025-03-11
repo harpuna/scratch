@@ -1,5 +1,6 @@
 import pytest
 from models import Customer, Order
+from models.application import Application
 
 
 @pytest.fixture
@@ -49,3 +50,26 @@ def mock_db_customer(mocker, mock_customer_dict, mock_order_dict):
     new_customer_mock.return_value = customer_no_orders
 
     # return customer_select_mock
+
+
+@pytest.fixture
+def mock_application_dict():
+    return {
+        "address": "123 First St",
+        "email": "jesse@ross.com",
+        "id": "app_2cb04c5af18c4067ac6fbd2874275ad1",
+        "interest_rate_percent": 10,
+        "monthly_payment_in_cents": 36972,
+        "name": "hello",
+        "phone": "111223333",
+        "ssn": "111223333",
+        "term_months": 36,
+        "total_amount_in_cents": 1000000,
+    }
+
+
+@pytest.fixture
+def mock_db_application(mocker, mock_application_dict):
+    new_application_mock = mocker.patch("routes.application.Application.insert")
+    application = Application(**mock_application_dict)
+    new_application_mock.return_value = application

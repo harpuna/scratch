@@ -1,7 +1,7 @@
 from flask_smorest import Blueprint
 from models.application import Application
 from schemas.application import ApplicationSchema
-from services.jsonplaceholder import calculate_term_and_rate
+from services.jsonplaceholder import calculate_term_and_rate, get_open_credit_lines
 from utils.calculator import calculate_monthly_payment
 
 application_bp = Blueprint("Application", __name__, url_prefix="/api")
@@ -11,7 +11,9 @@ application_bp = Blueprint("Application", __name__, url_prefix="/api")
 @application_bp.arguments(ApplicationSchema)
 @application_bp.response(201, ApplicationSchema)
 def add_application(request: Application):
-    terms, rate = calculate_term_and_rate(request["total_amount_in_cents"])
+    terms, rate = calculate_term_and_rate(
+        request["total_amount_in_cents"], get_open_credit_lines()
+    )
     request["interest_rate_percent"] = rate
     request["term_months"] = terms
     if terms and rate:
