@@ -86,6 +86,9 @@ erDiagram
 
 ## Prerequirements
 
+<details>
+  <summary>EXPAND DETAILS</summary>
+
 1. Python
    1. is installed?
       1. `which python` or `which python3`
@@ -121,6 +124,7 @@ erDiagram
     1. Clone this repo
        1. `git clone git@github.com:harpuna/scratch.git`
 
+</details>
 
 ## Build
 

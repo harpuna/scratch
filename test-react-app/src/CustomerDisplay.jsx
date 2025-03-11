@@ -6,7 +6,7 @@ function CustomerDisplay() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/api/customers/customer_a9c8fae693744a35850fda94c6d49a7a") // Replace with your API URL
+        fetch("http://127.0.0.1:5000/api/customers/customer_58487570992442be85494912cb4b8a37") // Replace with your API URL
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
