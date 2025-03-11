@@ -3,17 +3,40 @@ from logging.handlers import RotatingFileHandler
 
 from config import app_config
 from extensions import api, db, ma, migrate
-from flask import Flask, g, has_app_context, request
+from flask import Flask, current_app, g, has_app_context, request
 from utils.StructuredLogger import CustomFormatter, StructuredLogger
-
-app = Flask(app_config.API_TITLE)
 
 
 def create_app(config_class=app_config) -> Flask:
+    app = Flask(app_config.API_TITLE)
     app.config.from_object(config_class)
     configure_logging(app)
     configure_extensions(app)
     register_blueprints(api)
+
+    @app.before_request
+    def log_request():
+        logger().bind(
+            flask_request_method=request.method,
+            flask_request_path=request.path,
+        )
+
+    @app.after_request
+    def log_response(response):
+        if response:
+            status_code = response.status_code
+            logger().bind(
+                flask_response_status_code=status_code,
+            )
+            if status_code < 300:
+                logger().info("FLASK_RESPONSE")
+            elif status_code >= 500:
+                logger().error("FLASK_RESPONSE")
+            else:
+                logger().warning("FLASK_RESPONSE")
+
+        return response
+
     return app
 
 
@@ -23,33 +46,8 @@ def logger():
         return logging.Logger("scratch")
     if "logger" not in g:
         # cache a new instance in g which is scoped to the curent request
-        g.logger = StructuredLogger(app.logger)
+        g.logger = StructuredLogger(current_app.logger)
     return g.logger
-
-
-@app.before_request
-def log_request():
-    logger().bind(
-        flask_request_method=request.method,
-        flask_request_path=request.path,
-    )
-
-
-@app.after_request
-def log_response(response):
-    if response:
-        status_code = response.status_code
-        logger().bind(
-            flask_response_status_code=status_code,
-        )
-        if status_code < 300:
-            logger().info("FLASK_RESPONSE")
-        elif status_code >= 500:
-            logger().error("FLASK_RESPONSE")
-        else:
-            logger().warning("FLASK_RESPONSE")
-
-    return response
 
 
 def configure_logging(app: Flask) -> None:

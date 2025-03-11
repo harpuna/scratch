@@ -16,7 +16,7 @@ customer_bp = Blueprint("Customer", __name__, url_prefix="/api")
 @customer_bp.route("/customers", methods=["GET"])
 @customer_bp.response(200, CustomerSchema(many=True))
 def get_customers():
-    customers = Customer.query.all()
+    customers = Customer.all()
     logger().bind(all_customers_count=len(customers))
     return customers
 
